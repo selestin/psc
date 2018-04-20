@@ -7,7 +7,8 @@ Version: 1.0
 Author: Selestin Thomas
 Author URI: http://www.connectonline.in
 */
-    
+    require_once("quizclass.php");
+	$objQuiz = new quizClass();
 	
 	/* Hook Plugin */
     register_activation_hook(__FILE__, 'pravennplug');# INTIAL CALL
@@ -16,18 +17,34 @@ Author URI: http://www.connectonline.in
         require_once(ABSPATH . "wp-admin/includes/upgrade.php");
 		#DB CONNECTION VARIABLE
         global $wpdb;
-        # 1 spec_assigned_orders
-        $table_name = $wpdb->prefix . "123456"; // FOR DB PREFIX BY DEFAULT IT WILL BE wp_
+        # 1 quiz
+        $table_name = "quiz"; 
         $MSQL = "show tables like '$table_name'";
         if ($wpdb->get_var($MSQL) != $table_name) {
              $sql = "CREATE TABLE $table_name (
-					  `id` int(11) NOT NULL,
-					  `name` varchar(100) NOT NULL,
-					  `logo` text NOT NULL,
-					  `payment_term` varchar(100) NOT NULL,
-					  `payment_method` varchar(100) NOT NULL,
-					  `NEWWWWWWWWWWWWWWWW` varchar(100) NOT NULL,
-					  `status` int(11) NOT NULL
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `title` varchar(100) NOT NULL,
+					  `mark` int(11) NOT NULL,
+					  `wrong` int(11) NOT NULL,
+					  `total` int(10) NOT NULL,
+					  `time` bigint(20) NOT NULL,
+					  `intro` text NOT NULL,
+					  `tag` text NOT NULL,
+					   PRIMARY KEY (id)
+					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+            dbDelta($sql);
+        }
+		
+		# 2 quiz
+        $table_name = "questions"; 
+        $MSQL = "show tables like '$table_name'";
+        if ($wpdb->get_var($MSQL) != $table_name) {
+             $sql = "CREATE TABLE $table_name (
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `question` text NOT NULL,
+					  `choice` int(11) NOT NULL,
+					  `sn` int(11) NOT NULL,
+					   PRIMARY KEY (id)
 					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
             dbDelta($sql);
         }
@@ -54,7 +71,7 @@ Author URI: http://www.connectonline.in
         wp_enqueue_script('jquery.dataTables.js'); */
     }
 	
-function addquiz()
+	function addquiz()
     {
         include "addquiz.php";
     }
@@ -64,6 +81,7 @@ function addquiz()
         include "listquiz.php";
     }
   
+	include('formaction.php');
     /**
      * Redirect user after successful login.
      *
