@@ -23,7 +23,7 @@
 
 <div class="wrap">
 	<h1 class="wp-heading-inline">Quiz</h1>
-	 <a href="admin.php?page=firm_add&act=add&type=<?php echo $type ?>" class="page-title-action">Add New</a>
+	 <a href="admin.php?page=addquiz&act=add&type=<?php echo $type ?>" class="page-title-action">Add New</a>
 		<hr class="wp-header-end">
 	
 	

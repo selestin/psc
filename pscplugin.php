@@ -57,7 +57,8 @@ Author URI: http://www.connectonline.in
     {
 		
 		add_menu_page('Page title', 'Quiz', 'manage_options', 'listquiz', '');
-		add_submenu_page( 'listquiz', 'Page title', 'Sub-menu title', 'manage_options', 'admin.php?page=addquiz', '');
+		add_submenu_page( 'listquiz', 'Page title', 'Add new quiz', 'manage_options', 'admin.php?page=addquiz', '');
+		add_submenu_page( 'listquiz', 'Page title', 'Add new Questions', 'manage_options', 'admin.php?page=addquiz', '');
 		
 	
 		#FOR ACCESS PERMISSION
